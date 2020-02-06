@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hospital.Doctors;
-import com.hospital.DAO.DoctorsDAO;
+import com.hospital.hospitalDAO.DoctorsDAO;
 import com.hospital.manage.ConnectionUtil;
 import com.hospital.manage.Logger;
 

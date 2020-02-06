@@ -2,7 +2,8 @@ package com.hospital.TestPayments;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-import com.hospital.DAO.PaymentsDAO;
+
+import com.hospital.hospitalDAO.PaymentsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

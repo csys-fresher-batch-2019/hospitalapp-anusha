@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import com.hospital.Appointments;
-import com.hospital.DAO.AppointmentsDAO;
+import com.hospital.hospitalDAO.AppointmentsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

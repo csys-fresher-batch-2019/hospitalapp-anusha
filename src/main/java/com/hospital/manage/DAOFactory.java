@@ -1,15 +1,15 @@
 package com.hospital.manage;
 
-import com.hospital.DAO.AppointmentsDAO;
-import com.hospital.DAO.DepartmentsDAO;
-import com.hospital.DAO.DoctorsDAO;
-import com.hospital.DAO.PatientsDAO;
-import com.hospital.DAO.PaymentsDAO;
 import com.hospital.Impl.AppointmentsDAOImpl;
 import com.hospital.Impl.DepartmentsDAOImpl;
 import com.hospital.Impl.DoctorsDAOImpl;
 import com.hospital.Impl.PatientsDAOImpl;
 import com.hospital.Impl.PaymentsDAOImpl;
+import com.hospital.hospitalDAO.AppointmentsDAO;
+import com.hospital.hospitalDAO.DepartmentsDAO;
+import com.hospital.hospitalDAO.DoctorsDAO;
+import com.hospital.hospitalDAO.PatientsDAO;
+import com.hospital.hospitalDAO.PaymentsDAO;
 
 public class DAOFactory {
 

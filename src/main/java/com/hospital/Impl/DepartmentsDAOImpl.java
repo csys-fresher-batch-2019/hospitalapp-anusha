@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.hospital.Departments;
-import com.hospital.DAO.DepartmentsDAO;
+import com.hospital.hospitalDAO.DepartmentsDAO;
 import com.hospital.manage.ConnectionUtil;
 import com.hospital.manage.Logger;
 
@@ -70,7 +69,6 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 
 		String sql = "Update departments set active_departments = ? where department_id = ?";
 		LOGGER.debug("Update departments set active_departments = ? where department_id = ?");
-
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 			
@@ -87,23 +85,5 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		}
 
 	}
-
-	/*public void deleteDepartment(int DepartmentID) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-
-		String sql = "Delete from departments where department_id = ?";
-		LOGGER.debug("Delete from departments where department_id = ?");
-		
-		Connection con = ConnectionUtil.getconnection();
-
-		// prepare query
-		PreparedStatement pst = con.prepareStatement(sql);
-		pst.setInt(1, DepartmentID);
-
-		// execute query
-		int rows = pst.executeUpdate();
-		LOGGER.debug("No of rows deleted " + rows);
-
-	}*/
 
 }

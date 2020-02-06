@@ -1,4 +1,4 @@
-package com.hospital.DAO;
+package com.hospital.hospitalDAO;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;

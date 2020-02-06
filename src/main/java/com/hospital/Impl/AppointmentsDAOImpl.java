@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hospital.Appointments;
-import com.hospital.DAO.AppointmentsDAO;
+import com.hospital.hospitalDAO.AppointmentsDAO;
 import com.hospital.manage.ConnectionUtil;
 import com.hospital.manage.Logger;
 

@@ -2,8 +2,8 @@ package com.hospital.TestDoctors;
 
 import java.util.Scanner;
 import com.hospital.Doctors;
-import com.hospital.DAO.DepartmentsDAO;
-import com.hospital.DAO.DoctorsDAO;
+import com.hospital.hospitalDAO.DepartmentsDAO;
+import com.hospital.hospitalDAO.DoctorsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

@@ -1,7 +1,8 @@
 package com.hospital.TestPayments;
 
 import java.sql.SQLException;
-import com.hospital.DAO.PaymentsDAO;
+
+import com.hospital.hospitalDAO.PaymentsDAO;
 import com.hospital.manage.DAOFactory;
 
 public class TestUpdatePayment {

@@ -1,6 +1,6 @@
 package com.hospital.TestDepartments;
 
-import com.hospital.DAO.DepartmentsDAO;
+import com.hospital.hospitalDAO.DepartmentsDAO;
 import com.hospital.manage.DAOFactory;
 
 public class TestDisplayDepartments {

@@ -1,7 +1,8 @@
 package com.hospital.TestDoctors;
 
 import java.sql.SQLException;
-import com.hospital.DAO.DoctorsDAO;
+
+import com.hospital.hospitalDAO.DoctorsDAO;
 import com.hospital.manage.DAOFactory;
 
 public class TestDisplayDoctors {

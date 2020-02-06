@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import com.hospital.Patients;
-import com.hospital.DAO.PatientsDAO;
+import com.hospital.hospitalDAO.PatientsDAO;
 import com.hospital.manage.ConnectionUtil;
 import com.hospital.manage.Logger;
 

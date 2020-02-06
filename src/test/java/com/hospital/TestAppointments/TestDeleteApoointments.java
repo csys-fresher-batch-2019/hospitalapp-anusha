@@ -2,7 +2,8 @@ package com.hospital.TestAppointments;
 
 import java.util.Scanner;
 import java.sql.SQLException;
-import com.hospital.DAO.AppointmentsDAO;
+
+import com.hospital.hospitalDAO.AppointmentsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

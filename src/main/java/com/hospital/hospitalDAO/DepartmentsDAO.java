@@ -1,4 +1,4 @@
-package com.hospital.DAO;
+package com.hospital.hospitalDAO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,8 +15,5 @@ public interface DepartmentsDAO {
 	
 	//update
 	void updateDepartment(int active, int departmentID ) throws ClassNotFoundException, SQLException;
-	
-	//delete
-	//void deleteDepartment(int DepartmentID) throws SQLException, ClassNotFoundException;
 
 }
