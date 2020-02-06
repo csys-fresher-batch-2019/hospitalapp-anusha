@@ -68,9 +68,9 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 		//LOGGER.debug(sql);
 		
 		
-		try(Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement();) {
+		try(Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement();ResultSet rows = stmt.executeQuery(sql);) {
 			
-			ResultSet rows = stmt.executeQuery(sql);
+			
 			
 			//LOGGER.debug(rows);
 			while (rows.next()) {
@@ -114,15 +114,14 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	{
 		List<Doctors> list = new ArrayList<Doctors>();
 		String sql = "Select doctor_id,department_id,active_doctors from doctors where doctor_name = ?";
-		
-		
-		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+			
+		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);ResultSet rows = pst.executeQuery();) {
 			pst.setString(1, doctorName);
 
 			LOGGER.debug( "Select doctor_id,department_id,active_doctors from doctors where doctor_name = "+doctorName);
 			
 			// execute query
-			ResultSet rows = pst.executeQuery();
+			
 			LOGGER.debug("No of rows found: " + rows);
 			while (rows.next()) {
 				int doctorId = rows.getInt("doctor_id");
