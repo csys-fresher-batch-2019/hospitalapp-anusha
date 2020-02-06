@@ -11,19 +11,24 @@ public class Logger {
 
 	public void getInput(Object message) {
 
-		System.out.println(message);
+		Logger.log(message);
 
+	}
+
+	private static void log(Object message) {
+		// TODO Auto-generated method stub
+		System.out.println(message);
 	}
 
 	public void debug(Object message) {
 
-		System.out.println(message);
+		Logger.log(message);
 
 	}
 
 	public void info(Object message) {
 
-		System.out.println(message);
+		Logger.log(message);
 
 	}
 
