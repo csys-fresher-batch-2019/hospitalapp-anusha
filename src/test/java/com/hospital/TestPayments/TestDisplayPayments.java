@@ -1,4 +1,4 @@
-package com.hospital.testpayments;
+package com.hospital.testPayments;
 
 import java.sql.SQLException;
 

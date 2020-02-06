@@ -1,4 +1,4 @@
-package com.hospital.testpatients;
+package com.hospital.testPatients;
 
 import java.sql.SQLException;
 import java.util.Scanner;

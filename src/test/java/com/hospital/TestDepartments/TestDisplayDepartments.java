@@ -1,4 +1,4 @@
-package com.hospital.testdepartments;
+package com.hospital.testDepartments;
 
 import com.hospital.dao.DepartmentsDAO;
 import com.hospital.manage.DAOFactory;

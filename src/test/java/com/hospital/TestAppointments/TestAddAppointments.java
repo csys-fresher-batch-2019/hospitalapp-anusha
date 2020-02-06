@@ -1,4 +1,4 @@
-package com.hospital.testappointments;
+package com.hospital.testAppointments;
 
 import java.util.Scanner;
 import java.sql.SQLException;

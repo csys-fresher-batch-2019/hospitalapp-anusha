@@ -1,4 +1,4 @@
-package com.hospital.testdepartments;
+package com.hospital.testDepartments;
 
 import java.util.Scanner;
 
