@@ -8,7 +8,7 @@ import com.hospital.Departments;
 public interface DepartmentsDAO {
 	
 	//insert
-	void addDepartment(Departments dept);
+	void addDepartment(Departments dept) throws ClassNotFoundException, SQLException;
 	
 	//select
 	List<Departments> displayDepartments() throws Exception;

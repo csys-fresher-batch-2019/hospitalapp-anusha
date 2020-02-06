@@ -17,23 +17,21 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 
 	private static Logger LOGGER = Logger.getInstance();
 	
-	public void addDepartment(Departments dept) {
+	public void addDepartment(Departments dept) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 
 		String sql = "insert into departments (department_id,department_name)values (department_id_sq.nextval,?)";
 		LOGGER.debug("insert into departments (department_id,department_name)values (department_id_sq.nextval,?)");
-		// get connection
-		try {
-			Connection con = ConnectionUtil.getconnection();
+		
+		try(Connection con = ConnectionUtil.getconnection();PreparedStatement pst = con.prepareStatement(sql);) {
 
-			// prepare query
-			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, dept.getDepartmentName());
 
-			// execute query
 			int rows = pst.executeUpdate();
 			LOGGER.debug("No of rows inserted " + rows);
-		} catch (Exception e) {
+			
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -44,19 +42,23 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		List<Departments> list = new ArrayList<Departments>();
 		String sql = "select department_id,department_name from departments";
 		LOGGER.debug(sql);
-		Connection con = ConnectionUtil.getconnection();
-		Statement stmt = con.createStatement();
-		ResultSet rows = stmt.executeQuery(sql);
-		LOGGER.debug(rows);
 		
-		while (rows.next()) {
-			String deptName = rows.getString("department_name");
-			int deptId = rows.getInt("department_id");
-			LOGGER.debug(deptId+"-"+deptName);
-			Departments d1 = new Departments();
-			d1.setDepartmentID(deptId);
-			d1.setDepartmentName(deptName);
-			list.add(d1);
+		try (Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement(); ResultSet rows = stmt.executeQuery(sql);){
+			
+			LOGGER.debug(rows);
+			
+			while (rows.next()) {
+				String deptName = rows.getString("department_name");
+				int deptId = rows.getInt("department_id");
+				LOGGER.debug(deptId+"-"+deptName);
+				Departments d1 = new Departments();
+				d1.setDepartmentID(deptId);
+				d1.setDepartmentName(deptName);
+				list.add(d1);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 		// TODO Auto-generated method stub
@@ -69,16 +71,20 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		String sql = "Update departments set active_departments = ? where department_id = ?";
 		LOGGER.debug("Update departments set active_departments = ? where department_id = ?");
 
-		Connection con = ConnectionUtil.getconnection();
+		
+		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+			
+			// prepare query
+			pst.setInt(1, active);
+			pst.setInt(2, departmentID);
 
-		// prepare query
-		PreparedStatement pst = con.prepareStatement(sql);
-		pst.setInt(1, active);
-		pst.setInt(2, departmentID);
-
-		// execute query
-		int rows = pst.executeUpdate();
-		LOGGER.debug("No of rows updated " + rows);
+			// execute query
+			int rows = pst.executeUpdate();
+			LOGGER.debug("No of rows updated " + rows);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

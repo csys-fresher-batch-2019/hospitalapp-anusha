@@ -8,7 +8,7 @@ import com.hospital.Patients;
 public interface PatientsDAO {
 	
 	//insert
-	void addPatients(Patients p);
+	void addPatients(Patients p) throws ClassNotFoundException, SQLException;
 	
 	//update
 	void updatePatientsweight(int age, String patientId) throws ClassNotFoundException, SQLException;
