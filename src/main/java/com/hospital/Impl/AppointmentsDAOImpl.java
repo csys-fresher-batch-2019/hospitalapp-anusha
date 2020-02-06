@@ -38,14 +38,12 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			LOGGER.debug("No of rows inserted " + rows);
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 	
 	}
 
 	public void updateAppointments(LocalDateTime startingTime, int appointmentId) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "Update appointment set s_time = ? where appointment_id = ?";
 		LOGGER.debug(sql);
@@ -60,13 +58,11 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 		
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 	}
 
 	public List<Appointments> displayAppointments() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		
 		List<Appointments> list = new ArrayList<Appointments>();
 		
@@ -92,14 +88,12 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return null;
 	}
 
 	public void deleteAppointments(int appointmentId) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "Update appointment set active_appointments = 0 where appointment_id = ?";
 		LOGGER.debug(sql);
@@ -112,8 +106,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			LOGGER.debug("No of rows deleted " + rows);
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		
 	}
@@ -144,8 +137,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return list;
 	}
@@ -176,8 +168,7 @@ public List<Appointments> doctorAppointments(int doctorId) throws SQLException, 
 			
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return list;
 	}
