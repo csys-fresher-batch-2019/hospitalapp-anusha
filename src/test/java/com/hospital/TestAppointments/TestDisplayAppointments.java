@@ -1,8 +1,8 @@
-package com.hospital.TestAppointments;
+package com.hospital.testappointments;
 
 import java.sql.SQLException;
 
-import com.hospital.hospitalDAO.AppointmentsDAO;
+import com.hospital.dao.AppointmentsDAO;
 import com.hospital.manage.DAOFactory;
 
 public class TestDisplayAppointments {

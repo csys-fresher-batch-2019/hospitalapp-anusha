@@ -1,10 +1,10 @@
-package com.hospital.TestPayments;
+package com.hospital.testpayments;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import com.hospital.Payments;
-import com.hospital.hospitalDAO.PaymentsDAO;
+import com.hospital.dao.PaymentsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

@@ -1,4 +1,4 @@
-package com.hospital.hospitalDAO;
+package com.hospital.dao;
 
 import java.sql.SQLException;
 import java.util.List;

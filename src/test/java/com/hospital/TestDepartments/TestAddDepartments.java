@@ -1,8 +1,8 @@
-package com.hospital.TestDepartments;
+package com.hospital.testdepartments;
 
 import java.util.Scanner;
 import com.hospital.Departments;
-import com.hospital.hospitalDAO.DepartmentsDAO;
+import com.hospital.dao.DepartmentsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

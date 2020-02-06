@@ -1,10 +1,10 @@
-package com.hospital.TestAppointments;
+package com.hospital.testappointments;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import com.hospital.hospitalDAO.AppointmentsDAO;
+import com.hospital.dao.AppointmentsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

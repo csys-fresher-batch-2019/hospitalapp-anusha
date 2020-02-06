@@ -1,8 +1,8 @@
-package com.hospital.TestPatients;
+package com.hospital.testpatients;
 
 import java.sql.SQLException;
 
-import com.hospital.hospitalDAO.PatientsDAO;
+import com.hospital.dao.PatientsDAO;
 import com.hospital.manage.DAOFactory;
 
 public class TestDisplayPatients {

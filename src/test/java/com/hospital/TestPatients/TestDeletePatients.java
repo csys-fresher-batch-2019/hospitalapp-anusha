@@ -1,9 +1,9 @@
-package com.hospital.TestPatients;
+package com.hospital.testpatients;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.hospital.hospitalDAO.PatientsDAO;
+import com.hospital.dao.PatientsDAO;
 import com.hospital.manage.DAOFactory;
 import com.hospital.manage.Logger;
 

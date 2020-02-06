@@ -1,4 +1,4 @@
-package com.hospital.Impl;
+package com.hospital.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import com.hospital.Patients;
-import com.hospital.hospitalDAO.PatientsDAO;
+import com.hospital.dao.PatientsDAO;
 import com.hospital.manage.ConnectionUtil;
 import com.hospital.manage.Logger;
 
