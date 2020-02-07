@@ -19,7 +19,9 @@ import com.hospital.manage.Logger;
 
 public class AppointmentsDAOImpl implements AppointmentsDAO {
 
-	private static Logger LOGGER = Logger.getInstance();
+	private static final String ACTION_1 = "appointment_id";
+	private static final Logger LOGGER = Logger.getInstance();
+	
 	public void addAppointments(Appointments app) throws SQLException, ClassNotFoundException
 	{
 		
@@ -64,7 +66,8 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 
 	public List<Appointments> displayAppointments() throws ClassNotFoundException, SQLException {
 		
-		List<Appointments> list = new ArrayList<Appointments>();
+		
+		List<Appointments> list = new ArrayList<>();
 		
 		String sql = "select appointment_id, patient_id, purpose, doctor_id, s_time, e_time,active_appointments from appointment";
 		LOGGER.debug(sql);
@@ -74,7 +77,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			LOGGER.debug(rows);
 			
 			while (rows.next()) {
-				String appId = rows.getString("appointment_id");
+				String appId = rows.getString(ACTION_1);
 				String patientId = rows.getString("patient_id");
 				String purpose = rows.getString("purpose");
 				String docId = rows.getString("doctor_id");
@@ -113,7 +116,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 	
 	public List<Appointments> findMyAppointments(int patientId) throws SQLException, ClassNotFoundException {
 		
-		List<Appointments> list = new ArrayList<Appointments>();
+		List<Appointments> list = new ArrayList<>();
 		String sql = "Select appointment_id, purpose, doctor_id, s_time, e_time, active_appointments from appointment where patient_id = ?";
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
@@ -123,7 +126,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			LOGGER.debug("No of rows found: " + rows);
 			
 			while (rows.next()) {
-				int appId = rows.getInt("appointment_id");
+				int appId = rows.getInt(ACTION_1);
 				String purpose = rows.getString("purpose");
 				int doctorId = rows.getInt("doctor_id");
 				String sTime = rows.getString("s_time");
@@ -144,7 +147,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 	
 public List<Appointments> doctorAppointments(int doctorId) throws SQLException, ClassNotFoundException {
 		
-		List<Appointments> list = new ArrayList<Appointments>();
+		List<Appointments> list = new ArrayList<>();
 		String sql = "Select appointment_id, purpose, patient_id, s_time, e_time, active_appointments from appointment where doctor_id = ?";
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
@@ -154,7 +157,7 @@ public List<Appointments> doctorAppointments(int doctorId) throws SQLException, 
 			LOGGER.debug("No of rows found: " + rows);
 			
 			while (rows.next()) {
-				int appId = rows.getInt("appointment_id");
+				int appId = rows.getInt(ACTION_1);
 				String purpose = rows.getString("purpose");
 				int patientId = rows.getInt("patient_id");
 				String sTime = rows.getString("s_time");
