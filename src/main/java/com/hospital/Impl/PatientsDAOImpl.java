@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import com.hospital.Patients;
 import com.hospital.dao.PatientsDAO;
@@ -18,16 +19,12 @@ public class PatientsDAOImpl implements PatientsDAO {
 	private static Logger LOGGER = Logger.getInstance();
 	
 	public void addPatients(Patients p) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "insert into patient (patient_id, patient_name, age, weight, address, phone_number, gender, disease, doctor_id, patient_type, entry_date,patient_password) \r\n"
 				+ "values (patient_id_sq.nextval,?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,?)";
 
 		LOGGER.debug("insert into patient (patient_id, patient_name, age, weight, address, phone_number, gender, disease, doctor_id, patient_type, entry_date,patient_password) values (patient_id_sq.nextval,?, ?, ?, ?, ?,  ?, ?, ?, ?, ?)");
 
-		// get connection
-		
-		
 		try (Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);){
 			
 			pst.setString(1, p.getPatientName());
@@ -52,7 +49,6 @@ public class PatientsDAOImpl implements PatientsDAO {
 	}
 
 	public void updatePatientsweight(int weight, String patientName) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "update patient set weight = ? where patient_name = ?";
 		LOGGER.debug("update patient set weight = ? where patient_name = ?");
@@ -73,7 +69,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 	}
 
 	public List<Patients> displayPatients() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
+
 		List<Patients> list = new ArrayList<Patients>();
 		String sql = "select patient_id,patient_name,age, weight, gender, address, phone_number, disease, doctor_id, entry_date, patient_type,active_patients from patient";
 		LOGGER.debug(sql);
@@ -104,7 +100,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 			LOGGER.debug(e);
 		}
 
-		return null;
+		return Collections.emptyList();
 	}
 
 	public void deletePatients(int patientId) throws ClassNotFoundException, SQLException {

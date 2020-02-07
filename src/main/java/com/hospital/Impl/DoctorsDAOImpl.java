@@ -18,7 +18,6 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	private static Logger LOGGER = Logger.getInstance();
 	
 	public void addDoctors(Doctors doc) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "insert into doctors (doctor_id,doctor_name,department_id,doctor_password) values(doctor_id_sq.nextval,?,?,?)";
 		LOGGER.debug(sql);
@@ -40,18 +39,12 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	public List<Doctors> displayDoctors() throws ClassNotFoundException, SQLException {
 
 		List<Doctors> list;
-		list = new ArrayList<Doctors>();
+		list = new ArrayList<>();
 		
-		String sql = "select doctor_id,doctor_name,department_id,active_doctors from doctors";
-		
-		//LOGGER.debug(sql);
-		
+		String sql = "select doctor_id,doctor_name,department_id,active_doctors from doctors";	
 		
 		try(Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement();ResultSet rows = stmt.executeQuery(sql);) {
-			
-			
-			
-			//LOGGER.debug(rows);
+
 			while (rows.next()) {
 				int doctorId = rows.getInt("doctor_id");
 				String doctorName = rows.getString("doctor_name");
@@ -72,8 +65,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 		
 		String sql = "Update doctors set active_doctors = 0 where doctor_id = ?";
 		//LOGGER.debug("Delete from doctors where department_id = ?");
-		
-		
+				
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 			
 			//pst.setInt(1, active);
@@ -89,7 +81,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	
 	public List<Doctors> findDoctorByName(String doctorName) throws SQLException, ClassNotFoundException
 	{
-		List<Doctors> list = new ArrayList<Doctors>();
+		List<Doctors> list = new ArrayList<>();
 		String sql = "Select doctor_id,department_id,active_doctors from doctors where doctor_name = ?";
 			
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);ResultSet rows = pst.executeQuery();) {

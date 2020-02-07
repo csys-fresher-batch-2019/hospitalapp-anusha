@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import com.hospital.Payments;
 import com.hospital.dao.PaymentsDAO;
@@ -18,7 +19,6 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 	private static Logger LOGGER = Logger.getInstance();
 	
 	public void addPayments(Payments pay) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
 
 		String sql = "insert into bills (bill_no, patient_id, total_amount, amount_paid, bill_date) values (bill_no_sq.nextval,?,?,?,?)";
 		LOGGER.debug(sql);
@@ -41,7 +41,6 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 	}
 
 	public void updatePayments() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "update bills set status ='PAID' where total_amount=amount_paid";
 		LOGGER.debug(sql);
@@ -58,9 +57,8 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 	}
 
 	public List<Payments> displayPayments() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
-		List<Payments> list = new ArrayList<Payments>();
+		List<Payments> list = new ArrayList<>();
 		
 		String sql = "select bill_no, patient_id, total_amount, amount_paid, pending_amount, bill_date, status from bills";
 		LOGGER.debug(sql);
@@ -86,13 +84,12 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			LOGGER.debug(e);
 		}
 		
-		return null;
+		return Collections.emptyList();
 	}
 
 	public List<Payments> findMyPayments(int patientId) throws SQLException, ClassNotFoundException {
-		// TODO Auto-generated method stub
 		
-		List<Payments> list = new ArrayList<Payments>();
+		List<Payments> list = new ArrayList<>();
 		
 		String sql = "select bill_no, total_amount, amount_paid, pending_amount, bill_date, status from bills where patient_id = ?";
 				
@@ -119,7 +116,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			LOGGER.debug(e);
 		}
 		
-		return null;
+		return Collections.emptyList();
 	}
 
 	public void updatePendingAmnt() throws ClassNotFoundException, SQLException {
