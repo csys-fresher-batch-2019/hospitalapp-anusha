@@ -12,6 +12,10 @@ import com.hospital.impl.PatientsDAOImpl;
 import com.hospital.impl.PaymentsDAOImpl;
 
 public class DAOFactory {
+	
+	private DAOFactory() {
+		    throw new IllegalStateException("Utility class");
+		  }
 
 	public static DepartmentsDAO getDepartmentsDAO() {
 		
