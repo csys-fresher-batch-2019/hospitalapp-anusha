@@ -15,36 +15,31 @@ public class DAOFactory {
 
 	public static DepartmentsDAO getDepartmentsDAO() {
 		
-		DepartmentsDAO departmentsDAO = new DepartmentsDAOImpl();
-		return departmentsDAO;
+		return new DepartmentsDAOImpl();
 		
 	}
 
 	public static DoctorsDAO getDoctorsDAO() {
-		
-		DoctorsDAO doctorsDAO = new DoctorsDAOImpl();
-		return doctorsDAO;
+
+		return new DoctorsDAOImpl();
 		
 	}
 
 	public static PatientsDAO getPatientsDAO() {
 		
-		PatientsDAO patientsDAO = new PatientsDAOImpl();
-		return patientsDAO;
+		return new PatientsDAOImpl();
 		
 	}
 
 	public static AppointmentsDAO getAppointmentsDAO() {
 		
-		AppointmentsDAO appointmentsDAO = new AppointmentsDAOImpl();
-		return appointmentsDAO;
+		return new AppointmentsDAOImpl();
 		
 	}
 
 	public static PaymentsDAO getPaymentsDAO() {
 		
-		PaymentsDAO paymentDAO = new PaymentsDAOImpl();
-		return paymentDAO;
+		return new PaymentsDAOImpl();
 		
 	}
 }

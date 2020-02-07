@@ -4,8 +4,7 @@ public class Logger {
 
 	public static Logger getInstance() {
 
-		Logger logger = new Logger();
-		return logger;
+		return new Logger();
 
 	}
 
@@ -16,8 +15,8 @@ public class Logger {
 	}
 
 	private static void log(Object message) {
-		// TODO Auto-generated method stub
-		System.out.println(message);
+		
+		Logger.log(message);
 	}
 
 	public void debug(Object message) {
@@ -34,7 +33,7 @@ public class Logger {
 
 	public void error(Object message) {
 
-		System.out.println(message);
+		Logger.log(message);
 
 	}
 
