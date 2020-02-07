@@ -33,32 +33,11 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 			LOGGER.debug("No of rows inserted " + rows);
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 	}
 
-	/*public void updateDoctors(String doctorName, int doctorId) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-
-		String sql = "Update doctors set doctor_name = ? where doctor_id = ?";
-		LOGGER.debug("Update doctors set doctor_name = ? where doctor_id = ?");
-
-		Connection con = ConnectionUtil.getconnection();
-
-		// prepare query
-		PreparedStatement pst = con.prepareStatement(sql);
-		pst.setString(1, doctorName);
-		pst.setInt(2, doctorId);
-
-		// execute query
-		int rows = pst.executeUpdate();
-		LOGGER.debug("No of rows updated " + rows);
-
-	}*/
-
 	public List<Doctors> displayDoctors() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		List<Doctors> list;
 		list = new ArrayList<Doctors>();
@@ -83,8 +62,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				list.add(d1);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return list;
 	}
@@ -105,8 +83,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 			int rows = pst.executeUpdate();
 			LOGGER.debug("No of rows deleted " + rows);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 	}
 	
@@ -132,8 +109,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				list.add(d1);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return list;
 	}

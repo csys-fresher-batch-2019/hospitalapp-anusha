@@ -36,8 +36,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 		} 
 		
 		catch (Exception e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();		
+			LOGGER.debug(e);		
 		}
 	}
 
@@ -53,8 +52,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 		} 
 		
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		
 	}
@@ -85,8 +83,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			}
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		
 		return null;
@@ -119,8 +116,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			}
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		
 		return null;
@@ -138,8 +134,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			LOGGER.debug("No of rows updated " + rows);
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 	}
 

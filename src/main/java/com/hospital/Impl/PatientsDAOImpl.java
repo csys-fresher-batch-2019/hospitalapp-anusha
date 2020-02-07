@@ -47,8 +47,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 			LOGGER.debug("No of rows inserted " + rows);
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 	}
 
@@ -68,8 +67,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 			LOGGER.debug("No of rows updated " + rows);
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 
 	}
@@ -103,8 +101,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 			}
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 
 		return null;
@@ -124,8 +121,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 			int rows = pst.executeUpdate();
 			LOGGER.debug("No of rows deleted " + rows);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 
 	}
@@ -163,8 +159,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return list;
 	}
@@ -186,8 +181,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 				LOGGER.debug(doctorId+"-"+doctorName+"-"+departmentName);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return null;
 	}

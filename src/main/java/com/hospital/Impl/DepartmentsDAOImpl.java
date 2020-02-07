@@ -32,7 +32,7 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 	}
 
@@ -56,16 +56,13 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 				list.add(d1);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 		return list;
-		// TODO Auto-generated method stub
 
 	}
 
 	public void updateDepartment(int active, int departmentID) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "Update departments set active_departments = ? where department_id = ?";
 		LOGGER.debug("Update departments set active_departments = ? where department_id = ?");
@@ -80,8 +77,7 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 			int rows = pst.executeUpdate();
 			LOGGER.debug("No of rows updated " + rows);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.debug(e);
 		}
 
 	}
