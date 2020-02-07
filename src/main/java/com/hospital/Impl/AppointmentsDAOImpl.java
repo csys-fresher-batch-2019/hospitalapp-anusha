@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.hospital.Appointments;
@@ -20,6 +21,10 @@ import com.hospital.manage.Logger;
 public class AppointmentsDAOImpl implements AppointmentsDAO {
 
 	private static final String ACTION_1 = "appointment_id";
+	private static final String ACTION_2 = "purpose";
+	private static final String ACTION_3 = "s_time";
+	private static final String ACTION_4 = "e_time";
+	private static final String ACTION_5 = "active_appointments";
 	private static final Logger LOGGER = Logger.getInstance();
 	
 	public void addAppointments(Appointments app) throws SQLException, ClassNotFoundException
@@ -79,11 +84,11 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			while (rows.next()) {
 				String appId = rows.getString(ACTION_1);
 				String patientId = rows.getString("patient_id");
-				String purpose = rows.getString("purpose");
+				String purpose = rows.getString(ACTION_2);
 				String docId = rows.getString("doctor_id");
-				String sTime = rows.getString("s_time");
-				String eTime = rows.getString("e_time");
-				String activeApp = rows.getString("active_appointments");			
+				String sTime = rows.getString(ACTION_3);
+				String eTime = rows.getString(ACTION_4);
+				String activeApp = rows.getString(ACTION_5);			
 				LOGGER.debug(appId+"-"+patientId+"-"+purpose+"-"+ "-"+docId+"-"+sTime+"-"+eTime+"-"+activeApp);
 				Appointments d1 = new Appointments();
 				list.add(d1);
@@ -93,7 +98,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 		catch (Exception e) {
 			LOGGER.debug(e);
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	public void deleteAppointments(int appointmentId) throws ClassNotFoundException, SQLException {
@@ -127,11 +132,11 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 			
 			while (rows.next()) {
 				int appId = rows.getInt(ACTION_1);
-				String purpose = rows.getString("purpose");
+				String purpose = rows.getString(ACTION_2);
 				int doctorId = rows.getInt("doctor_id");
-				String sTime = rows.getString("s_time");
-				String eTime = rows.getString("e_time");
-				int active = rows.getInt("active_appointments");
+				String sTime = rows.getString(ACTION_3);
+				String eTime = rows.getString(ACTION_4);
+				int active = rows.getInt(ACTION_5);
 				LOGGER.debug(appId+patientId+purpose+doctorId+sTime+eTime+active);
 				Appointments d2 = new Appointments();
 				list.add(d2);
@@ -158,11 +163,11 @@ public List<Appointments> doctorAppointments(int doctorId) throws SQLException, 
 			
 			while (rows.next()) {
 				int appId = rows.getInt(ACTION_1);
-				String purpose = rows.getString("purpose");
+				String purpose = rows.getString(ACTION_2);
 				int patientId = rows.getInt("patient_id");
-				String sTime = rows.getString("s_time");
-				String eTime = rows.getString("e_time");
-				int active = rows.getInt("active_appointments");
+				String sTime = rows.getString(ACTION_3);
+				String eTime = rows.getString(ACTION_4);
+				int active = rows.getInt(ACTION_5);
 				LOGGER.debug(appId+patientId+purpose+patientId+sTime+eTime+active);
 				Appointments d2 = new Appointments();
 				list.add(d2);
