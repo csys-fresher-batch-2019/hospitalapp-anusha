@@ -10,9 +10,6 @@ public interface DoctorsDAO {
 	//insert
 	void addDoctors(Doctors doc) throws ClassNotFoundException, SQLException;
 	
-	//update
-	//void updateDoctors(String doctorName, int doctorId) throws ClassNotFoundException, SQLException;
-	
 	//display
 	List<Doctors> displayDoctors() throws ClassNotFoundException, SQLException ;
 	

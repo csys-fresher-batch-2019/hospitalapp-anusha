@@ -63,11 +63,9 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	public void deleteDoctors(int doctorId) throws ClassNotFoundException, SQLException {
 
 		String sql = "Update doctors set active_doctors = 0 where doctor_id = ?";
-		//LOGGER.debug("Delete from doctors where department_id = ?");
-				
+		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
-			
-			//pst.setInt(1, active);
+
 			pst.setInt(1, doctorId);
 
 			// execute query

@@ -11,7 +11,7 @@ public interface DepartmentsDAO {
 	void addDepartment(Departments dept) throws ClassNotFoundException, SQLException;
 	
 	//select
-	List<Departments> displayDepartments() throws Exception;
+	List<Departments> displayDepartments() throws ClassNotFoundException, SQLException;
 	
 	//update
 	void updateDepartment(int active, int departmentID ) throws ClassNotFoundException, SQLException;

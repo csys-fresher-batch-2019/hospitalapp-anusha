@@ -33,7 +33,7 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		}
 	}
 
-	public List<Departments> displayDepartments() throws Exception {
+	public List<Departments> displayDepartments() throws ClassNotFoundException, SQLException {
 
 		List<Departments> list = new ArrayList<>();
 		String sql = "select department_id,department_name from departments";

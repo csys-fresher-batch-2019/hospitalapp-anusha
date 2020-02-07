@@ -57,7 +57,7 @@ public class Payments {
 		return pendingAmount;
 	}
 	
-	public void setPendingAmount(int pendingAmount) {
+	public void setPendingAmount() {
 		this.pendingAmount = totalAmount-amountPaid;
 	}
 	
@@ -66,7 +66,7 @@ public class Payments {
 		return status;
 	}
 	
-	public void setStatus(String status) {
+	public void setStatus() {
 		if(pendingAmount != 0)
 			this.status = "PAID";
 		else
