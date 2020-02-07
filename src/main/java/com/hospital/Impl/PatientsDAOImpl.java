@@ -16,7 +16,8 @@ import com.hospital.manage.Logger;
 
 public class PatientsDAOImpl implements PatientsDAO {
 
-	private static Logger LOGGER = Logger.getInstance();
+	private static final String ACTION_1 = "doctor_id";
+	private static final Logger LOGGER = Logger.getInstance();
 	
 	public void addPatients(Patients p) throws ClassNotFoundException, SQLException {
 
@@ -70,7 +71,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 
 	public List<Patients> displayPatients() throws ClassNotFoundException, SQLException {
 
-		List<Patients> list = new ArrayList<Patients>();
+		List<Patients> list = new ArrayList<>();
 		String sql = "select patient_id,patient_name,age, weight, gender, address, phone_number, disease, doctor_id, entry_date, patient_type,active_patients from patient";
 		LOGGER.debug(sql);
 	
@@ -87,7 +88,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 				String address = rows.getString("address");
 				String phoneNo = rows.getString("phone_number");
 				String disease = rows.getString("disease");
-				int docId = rows.getInt("doctor_id");
+				int docId = rows.getInt(ACTION_1);
 				String eTime = rows.getString("entry_date");
 				String patientType = rows.getString("patient_type");
 				int active = rows.getInt("active_patients");
@@ -104,7 +105,6 @@ public class PatientsDAOImpl implements PatientsDAO {
 	}
 
 	public void deletePatients(int patientId) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		String sql = "update active_patients=0 from patient where patient_id = ?";
 		LOGGER.debug("sql"+patientId);
@@ -124,18 +124,14 @@ public class PatientsDAOImpl implements PatientsDAO {
 
 	public List<Patients> findMyProfile(int patientId) throws SQLException, ClassNotFoundException {
 
-		List<Patients> list = new ArrayList<Patients>();
+		List<Patients> list = new ArrayList<>();
 		String sql = "Select patient_name, age, weight, address, phone_number, gender, disease, doctor_id, patient_type, entry_date from patient where patient_id = ?";
-
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
 			pst.setInt(1, patientId);
 
 			LOGGER.debug("Select patient_name, age, weight, address, phone_number, gender, disease, doctor_id, patient_type, entry_date from patient where patient_id = "+patientId);
 
-
-			// execute query
-			
 			LOGGER.debug("No of rows found: " + rows);
 
 			while (rows.next()) {		
@@ -146,7 +142,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 				String phoneNumber = rows.getString("phone_number");
 				String gender = rows.getString("gender");
 				String disease = rows.getString("disease");
-				int docId = rows.getInt("doctor_id");
+				int docId = rows.getInt(ACTION_1);
 				String patientType = rows.getString("patient_type");
 				String eDate = rows.getString("entry_date");
 				LOGGER.debug(name +","+ age +"," + weight +","+ address +"," + phoneNumber +"," + gender +"," + disease +"," + docId +"," + patientType +"," + eDate);
@@ -163,16 +159,14 @@ public class PatientsDAOImpl implements PatientsDAO {
 	public String[] joinDepartmentsDoctors() throws SQLException, ClassNotFoundException  {//to display doctor name nd id during doctor id entry
 		
 		String sql = ("select d.doctor_name,s.department_name,d.doctor_id from doctors d join departments s on d.department_id = s.department_id ");
-		
-		
-		
+
 		try(Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement(); ResultSet rows = stmt.executeQuery(sql);) {
 			
 			
 			while (rows.next())
 			{
 				String doctorName = rows.getString("doctor_name") ;
-				int doctorId = rows.getInt("doctor_id");
+				int doctorId = rows.getInt(ACTION_1);
 				String departmentName = rows.getString("department_name") ;
 				LOGGER.debug(doctorId+"-"+doctorName+"-"+departmentName);
 			}

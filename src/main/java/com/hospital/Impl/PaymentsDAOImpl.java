@@ -16,7 +16,7 @@ import com.hospital.manage.Logger;
 
 public class PaymentsDAOImpl implements PaymentsDAO {
 
-	private static Logger LOGGER = Logger.getInstance();
+	private static final Logger LOGGER = Logger.getInstance();
 	
 	public void addPayments(Payments pay) throws SQLException, ClassNotFoundException {
 
@@ -120,7 +120,6 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 	}
 
 	public void updatePendingAmnt() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		
 		String sql = "update bills set pending_amount=total_amount-amount_paid";
 		LOGGER.debug(sql);

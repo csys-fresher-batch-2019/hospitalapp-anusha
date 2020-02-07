@@ -15,7 +15,7 @@ import com.hospital.manage.Logger;
 
 public class DoctorsDAOImpl implements DoctorsDAO {
 
-	private static Logger LOGGER = Logger.getInstance();
+	private static final Logger LOGGER = Logger.getInstance();
 	
 	public void addDoctors(Doctors doc) throws ClassNotFoundException, SQLException {
 		
@@ -61,8 +61,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	}
 
 	public void deleteDoctors(int doctorId) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		
+
 		String sql = "Update doctors set active_doctors = 0 where doctor_id = ?";
 		//LOGGER.debug("Delete from doctors where department_id = ?");
 				
