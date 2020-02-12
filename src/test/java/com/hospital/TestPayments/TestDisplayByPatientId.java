@@ -23,10 +23,6 @@ public class TestDisplayByPatientId {
 		dao.findMyPayments(patientId);
 
 		in.close();
-
-		/*
-		 * PaymentsDAOImpl d1= new PaymentsDAOImpl(); d1.findMyPayments(1);
-		 */
 	}
 
 }

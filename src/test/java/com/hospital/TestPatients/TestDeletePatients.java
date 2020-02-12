@@ -12,7 +12,6 @@ public class TestDeletePatients {
 	private static Logger LOGGER = Logger.getInstance();
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		Scanner in = new Scanner(System.in);
 		

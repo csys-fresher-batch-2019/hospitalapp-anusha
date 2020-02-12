@@ -24,9 +24,6 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 	public void addAppointments(Appointments app) throws SQLException, ClassNotFoundException
 	{
 		
-//		String sql = "insert into appointment (appointment_id, patient_id, purpose, doctor_id,s_time,e_time)values(appointment_id_sq.nextval,?,?,?,?,?)"; 
-//		LOGGER.debug(sql);
-		
 		try(Connection con = ConnectionUtil.getconnection(); CallableStatement stmt=con.prepareCall("{call appointment_fixing(?,?,?,?)}")){
 			
 			stmt.setInt(1, app.getPatientId());
@@ -60,7 +57,6 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 				int docId = rows.getInt("doctor_id");
 				int activeApp = rows.getInt(ACTION_3);		
 				String appointmentStatus= rows.getString("appointment_status");
-				//LOGGER.debug(appId+"-"+patientId+"-"+purpose+"-"+ "-"+docId+"-"+sTime+"-"+eTime+"-"+activeApp);
 				Appointments d1 = new Appointments();
 				d1.setActive(activeApp);
 				d1.setPatientId(patientId);
@@ -113,7 +109,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 				int doctorId = rows.getInt("doctor_id");
 				int active = rows.getInt(ACTION_3);
 				String appointmentStatus= rows.getString("appointment_status");
-				//LOGGER.debug(appId+patientId+purpose+doctorId+sTime+eTime+active);
+				
 				Appointments d1 = new Appointments();
 				d1.setActive(active);
 				d1.setPatientId(patientId);
@@ -121,6 +117,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 				d1.setAppointmentId(appId);
 				d1.setPurpose(purpose);
 				d1.setAppointmentStatus(appointmentStatus);
+				
 				list.add(d1);
 				
 			}
@@ -148,12 +145,13 @@ public List<Appointments> doctorAppointments(int doctorId) throws SQLException, 
 				String purpose = rows.getString(ACTION_2);
 				int patientId = rows.getInt("patient_id");
 				int active = rows.getInt(ACTION_3);
-				//LOGGER.debug(appId+patientId+purpose+patientId+sTime+eTime+active);
+				
 				Appointments d2 = new Appointments();
 				d2.setAppointmentId(appId);
 				d2.setPurpose(purpose);
 				d2.setPatientId(patientId);
 				d2.setActive(active);
+				
 				list.add(d2);
 				
 			}

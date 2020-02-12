@@ -11,7 +11,6 @@ public class TestUpdateDepartments {
 	private static Logger LOGGER = Logger.getInstance();
 	
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
 
 		DepartmentsDAO d1 = DAOFactory.getDepartmentsDAO();
 		
@@ -28,6 +27,7 @@ public class TestUpdateDepartments {
 		d1.updateDepartment(active, departmentId);
 		
 		in.close();
+		
 	}
 
 }

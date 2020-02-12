@@ -56,7 +56,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				String dPhoneNumber = rows.getString("d_phone_number");
 				String dGender = rows.getString("d_gender");
 				int noOfAppointment = rows.getInt("no_of_appointments");
-				//LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
+				
 				Doctors d1 = new Doctors();
 				d1.setDoctorId(doctorId);
 				d1.setDoctorName(doctorName);
@@ -66,6 +66,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				d1.setdPhoneNumber(dPhoneNumber);
 				d1.setdGender(dGender);
 				d1.setNoOfAppointment(noOfAppointment);
+				
 				list.add(d1);
 			
 			}
@@ -109,12 +110,13 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				int deptId = rows.getInt("department_id");
 				int active = rows.getInt("active_doctors");
 				int present = rows.getInt("doctor_presence");
-				//LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
+				
 				Doctors d1 = new Doctors();
 				d1.setDoctorId(doctorId);
 				d1.setDepartmentId(deptId);
 				d1.setActive(active);
 				d1.setDoctorPresent(present);
+				
 				list.add(d1);
 			}
 		} catch (Exception e) {
@@ -138,11 +140,12 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				int doctorId = rows.getInt("doctor_id");
 				int deptId = rows.getInt("department_id");
 				String docName = rows.getString("doctor_name");
-				//LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
+				
 				Doctors d1 = new Doctors();
 				d1.setDoctorId(doctorId);
 				d1.setDepartmentId(deptId);
 				d1.setDoctorName(docName);
+				
 				list.add(d1);
 			}
 		} catch (Exception e) {

@@ -13,7 +13,6 @@ public class TestAddAppointments {
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Scanner in = new Scanner(System.in);
-		// TODO Auto-generated method stub
 
 		// input
 		Appointments d1 = new Appointments();
@@ -30,17 +29,6 @@ public class TestAddAppointments {
 		dao.addAppointments(d1);
 
 		in.close();
-		// input
-		/*Appointments d2 = new Appointments();
-		d2.patientId = 3 ;
-		d2.purpose = "Surgery";
-		d2.doctorId = 6;
-		d2.startingTime = LocalDateTime.parse("2020-01-20T12:00:00");
-		d2.endingTime = LocalDateTime.parse("2020-01-20T12:00:00").plus(Duration.of(30, ChronoUnit.MINUTES));
-
-		// call dao
-		AppointmentsDAOImpl daoImpl2 = new AppointmentsDAOImpl();
-		daoImpl2.addAppointments(d2);*/
 
 	}
 

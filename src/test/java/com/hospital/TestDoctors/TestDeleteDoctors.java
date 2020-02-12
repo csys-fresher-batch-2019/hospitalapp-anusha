@@ -12,7 +12,6 @@ public class TestDeleteDoctors {
 	private static Logger LOGGER = Logger.getInstance();
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		Scanner in = new Scanner(System.in);
 		
@@ -26,9 +25,7 @@ public class TestDeleteDoctors {
 		dao.deleteDoctors(doctorId);
 
 		in.close();
-		
-		/*DoctorsDAOImpl d1 = new DoctorsDAOImpl();
-		d1.deleteDoctors(1,6);*/
+
 		
 	}
 

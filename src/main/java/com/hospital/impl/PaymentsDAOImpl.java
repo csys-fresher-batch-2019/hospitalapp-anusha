@@ -87,7 +87,6 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 		int pendingAmount = rows.getInt("pending_amount");
 		LocalDateTime billDateTime = LocalDateTime.parse( rows.getString("bill_date"));
 		String status = rows.getString("status");			
-		//LOGGER.debug(billNo+","+patientId+","+totalAmount+","+amountPaid+","+pendingAmount+","+billDate+","+status);
 		
 		Payments d1 = new Payments();
 		

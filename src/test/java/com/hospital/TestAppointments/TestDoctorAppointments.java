@@ -12,7 +12,6 @@ public class TestDoctorAppointments {
 	private static Logger LOGGER = Logger.getInstance();
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		Scanner in = new Scanner(System.in);
         
@@ -24,9 +23,6 @@ public class TestDoctorAppointments {
 		
 		in.close();
 		
-		/*AppointmentsDAOImpl d1= new AppointmentsDAOImpl();
-		d1.doctorAppointments(2);
-		*/
 	}
 
 }

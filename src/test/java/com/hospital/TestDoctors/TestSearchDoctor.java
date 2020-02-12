@@ -11,7 +11,6 @@ public class TestSearchDoctor {
 	private static Logger LOGGER = Logger.getInstance();
 	
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
 
 		Scanner in = new Scanner(System.in);
 		
@@ -24,9 +23,6 @@ public class TestSearchDoctor {
 
 		in.close();
 
-		/*
-		 * DoctorsDAOImpl d1= new DoctorsDAOImpl(); d1.findDoctorByName("Dhana");
-		 */
 	}
 
 }

@@ -115,13 +115,14 @@ public class PatientsDAOImpl implements PatientsDAO {
 				String address = rows.getString("address");
 				String phoneNumber = rows.getString("phone_number");
 				String gender = rows.getString("p_gender");
-				//LOGGER.debug(name +","+ age +"," + weight +","+ address +"," + phoneNumber +"," + gender +"," + disease +"," + docId +"," + patientType +"," + eDate);
+				
 				Patients d2 = new Patients();
 				d2.setPatientName(name);
 				d2.setAddress(address);
 				d2.setAge(age);
 				d2.setPhoneNumber(phoneNumber);
 				d2.setGender(gender);
+				
 				list.add(d2);
 
 			}
@@ -145,12 +146,14 @@ public class PatientsDAOImpl implements PatientsDAO {
 				String doctorName = rows.getString("doctor_name") ;
 				int doctorId = rows.getInt("doctor_id");
 				String departmentName = rows.getString("department_name") ;
-				//LOGGER.debug(doctorId+"-"+doctorName+"-"+departmentName);
+				
 				Departments d1= new Departments();
 				d1.setDepartmentName(departmentName);
 				Doctors d2 = new Doctors();
 				d2.setDoctorName(doctorName);
 				d2.setDoctorId(doctorId);
+				
+				list.add(d2);
 
 			}
 		} catch (Exception e) {
