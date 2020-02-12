@@ -16,6 +16,8 @@ import com.hospital.manage.Logger;
 public class DoctorsDAOImpl implements DoctorsDAO {
 
 	private static final Logger LOGGER = Logger.getInstance();
+	private static final String ACTION_1 = "doctor_id";
+	private static final String ACTION_2 = "department_id";
 	
 	public void addDoctors(Doctors doc) throws ClassNotFoundException, SQLException {
 		
@@ -48,9 +50,9 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 		try(Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement();ResultSet rows = stmt.executeQuery(sql);) {
 
 			while (rows.next()) {
-				int doctorId = rows.getInt("doctor_id");
+				int doctorId = rows.getInt(ACTION_1);
 				String doctorName = rows.getString("doctor_name");
-				int deptId = rows.getInt("department_id");
+				int deptId = rows.getInt(ACTION_2);
 				int active = rows.getInt("active_doctors");
 				int present = rows.getInt("doctor_presence");
 				String dPhoneNumber = rows.getString("d_phone_number");
@@ -106,8 +108,8 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 			
 			LOGGER.debug("No of rows found: " + rows);
 			while (rows.next()) {
-				int doctorId = rows.getInt("doctor_id");
-				int deptId = rows.getInt("department_id");
+				int doctorId = rows.getInt(ACTION_1);
+				int deptId = rows.getInt(ACTION_2);
 				int active = rows.getInt("active_doctors");
 				int present = rows.getInt("doctor_presence");
 				
@@ -137,8 +139,8 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 			
 			LOGGER.debug("No of rows found: " + rows);
 			while (rows.next()) {
-				int doctorId = rows.getInt("doctor_id");
-				int deptId = rows.getInt("department_id");
+				int doctorId = rows.getInt(ACTION_1);
+				int deptId = rows.getInt(ACTION_2);
 				String docName = rows.getString("doctor_name");
 				
 				Doctors d1 = new Doctors();
