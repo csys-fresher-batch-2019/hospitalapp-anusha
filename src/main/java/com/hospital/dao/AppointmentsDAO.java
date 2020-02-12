@@ -1,7 +1,6 @@
 package com.hospital.dao;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 import com.hospital.Appointments;
 
@@ -9,9 +8,6 @@ public interface AppointmentsDAO {
 
 	//insert
 	public void addAppointments(Appointments app) throws SQLException, ClassNotFoundException;
-	
-	//update
-	public void updateAppointments(LocalDateTime startingTime, int appointmentId) throws ClassNotFoundException, SQLException ;
 	
 	//display
 	List<Appointments> displayAppointments() throws ClassNotFoundException, SQLException;

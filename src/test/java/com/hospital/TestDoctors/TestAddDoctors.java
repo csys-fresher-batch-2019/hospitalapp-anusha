@@ -31,6 +31,12 @@ public class TestAddDoctors {
         LOGGER.debug("Enter password : ");
         d1.setDoctorPassword(in.next());
         
+        LOGGER.debug("Enter dPhoneNumber : ");
+        d1.setdPhoneNumber(in.next());
+        
+        LOGGER.debug("Enter dGender : ");
+        d1.setdGender(in.next());
+        
         DoctorsDAO dao = DAOFactory.getDoctorsDAO();
 		dao.addDoctors(d1);
 

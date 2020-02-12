@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +20,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 	
 	public void addPayments(Payments pay) throws SQLException, ClassNotFoundException {
 
-		String sql = "insert into bills (bill_no, patient_id, total_amount, amount_paid, bill_date) values (bill_no_sq.nextval,?,?,?,?)";
+		String sql = "insert into bills (bill_no, patient_id, total_amount, amount_paid) values (bill_no_sq.nextval,?,?,?)";
 		LOGGER.debug(sql);
 				
 		try (Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);){
@@ -28,7 +28,6 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			pst.setInt(1, pay.getPatientId());
 			pst.setInt(2, pay.getTotalAmount());
 			pst.setInt(3, pay.getAmountPaid()); 
-			pst.setTimestamp(4, Timestamp.valueOf(pay.getBillDate()));
 			
 			int rows = pst.executeUpdate();
 			LOGGER.debug("No of rows inserted " + rows);
@@ -68,15 +67,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			LOGGER.debug(rows);
 			
 			while (rows.next()) {
-				int billNo = rows.getInt("bill_no");
-				int patientId = rows.getInt("patient_id");
-				int totalAmount = rows.getInt("total_amount");
-				int amountPaid = rows.getInt("amount_paid");
-				int pendingAmount = rows.getInt("pending_amount");
-				String billDate = rows.getString("bill_date");
-				String status = rows.getString("status");			
-				LOGGER.debug(billNo+","+patientId+","+totalAmount+","+amountPaid+","+pendingAmount+","+billDate+","+status);
-				Payments d1 = new Payments();
+				Payments d1 = toRow(rows);
 				list.add(d1);
 			}
 		} 
@@ -87,11 +78,35 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 		return Collections.emptyList();
 	}
 
+	private Payments toRow(ResultSet rows) throws SQLException {
+		
+		int billNo = rows.getInt("bill_no");
+		int patientId = rows.getInt("patient_id");
+		int totalAmount = rows.getInt("total_amount");
+		int amountPaid = rows.getInt("amount_paid");
+		int pendingAmount = rows.getInt("pending_amount");
+		LocalDateTime billDateTime = LocalDateTime.parse( rows.getString("bill_date"));
+		String status = rows.getString("status");			
+		//LOGGER.debug(billNo+","+patientId+","+totalAmount+","+amountPaid+","+pendingAmount+","+billDate+","+status);
+		
+		Payments d1 = new Payments();
+		
+		d1.setBillNo(billNo);
+		d1.setPatientId(patientId);
+		d1.setTotalAmount(totalAmount);
+		d1.setAmountPaid(amountPaid);
+		d1.setPendingAmount(pendingAmount);
+		d1.setBillDateTime(billDateTime);
+		d1.setPatientId(patientId);
+		d1.setPayStatus(status);
+		return d1;
+	}
+
 	public List<Payments> findMyPayments(int patientId) throws SQLException, ClassNotFoundException {
 		
 		List<Payments> list = new ArrayList<>();
 		
-		String sql = "select bill_no, total_amount, amount_paid, pending_amount, bill_date, status from bills where patient_id = ?";
+		String sql = "select bill_no,patient_id, total_amount, amount_paid, pending_amount, bill_date, status from bills where patient_id = ?";
 				
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
 			pst.setInt(1, patientId);			
@@ -101,14 +116,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 			LOGGER.debug("No of rows found: " + rows);
 			
 			while (rows.next()) {
-				int billNo = rows.getInt("bill_no");
-				int totalAmount = rows.getInt("total_amount");
-				int amountPaid = rows.getInt("amount_paid");
-				int pendingAmount = rows.getInt("pending_amount");
-				String billDate = rows.getString("bill_date");
-				String status = rows.getString("status");			
-				LOGGER.debug(billNo+","+patientId+","+totalAmount+","+amountPaid+","+pendingAmount+","+billDate+","+status);
-				Payments d1 = new Payments();
+				Payments d1 = toRow(rows);
 				list.add(d1);
 			}
 		} 

@@ -1,7 +1,6 @@
 package com.hospital.testPatients;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 import com.hospital.Patients;
 import com.hospital.dao.PatientsDAO;
@@ -29,9 +28,6 @@ public class TestAddPatients {
 
 		LOGGER.debug("Enter gender : ");
 		d1.setGender(in.next());
-		
-		LOGGER.debug("Enter weight : ");
-		d1.setWeight(in.nextInt());
 
 		LOGGER.debug("Enter address : ");
 		d1.setAddress(in.next());
@@ -39,19 +35,8 @@ public class TestAddPatients {
 		LOGGER.debug("Enter phoneNumber : ");
 		d1.setPhoneNumber(in.next());
 
-		LOGGER.debug("Enter disease : ");
-		d1.setDisease(in.next());
-
-		dao.joinDepartmentsDoctors();
-
-		LOGGER.debug("Enter doctorId : ");
-		d1.setDoctorId(in.nextInt());
-		
-		LOGGER.debug("Enter patientType : ");
-		d1.setPatientType(in.next());
-		
-		LOGGER.debug("Enter entryDate : ");
-		d1.setEntryDate(LocalDateTime.parse(in.next()));
+		LOGGER.debug("Enter patientPassword : ");
+		d1.setPatientPassword(in.next());
 
 		dao.addPatients(d1);
 		

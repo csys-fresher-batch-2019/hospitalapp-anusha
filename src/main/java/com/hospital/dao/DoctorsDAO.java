@@ -19,4 +19,6 @@ public interface DoctorsDAO {
 	//search
 	public List<Doctors> findDoctorByName(String doctorName) throws SQLException, ClassNotFoundException;
 	
+	//doc present
+	public List<Doctors> doctorsPresent();
 }

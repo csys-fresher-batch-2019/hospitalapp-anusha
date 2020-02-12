@@ -19,7 +19,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	
 	public void addDoctors(Doctors doc) throws ClassNotFoundException, SQLException {
 		
-		String sql = "insert into doctors (doctor_id,doctor_name,department_id,doctor_password) values(doctor_id_sq.nextval,?,?,?)";
+		String sql = "insert into doctors (doctor_id,doctor_name,department_id,doctor_password,d_phone_number,d_gender) values(doctor_id_sq.nextval,?,?,?,?,?)";
 		LOGGER.debug(sql);
 
 		try (Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);){
@@ -27,7 +27,9 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 			pst.setString(1, doc.getDoctorName());
 			pst.setInt(2, doc.getDepartmentId());
 			pst.setString(3, doc.getDoctorPassword());
-
+			pst.setString(4, doc.getdPhoneNumber());
+			pst.setString(5, doc.getdGender());
+			
 			int rows = pst.executeUpdate();
 			LOGGER.debug("No of rows inserted " + rows);
 		} 
@@ -41,7 +43,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 		List<Doctors> list;
 		list = new ArrayList<>();
 		
-		String sql = "select doctor_id,doctor_name,department_id,active_doctors from doctors";	
+		String sql = "select doctor_id,doctor_name,department_id,active_doctors,doctor_presence,d_phone_number,d_gender,no_of_appointments from doctors";	
 		
 		try(Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement();ResultSet rows = stmt.executeQuery(sql);) {
 
@@ -50,9 +52,22 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				String doctorName = rows.getString("doctor_name");
 				int deptId = rows.getInt("department_id");
 				int active = rows.getInt("active_doctors");
-				LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
+				int present = rows.getInt("doctor_presence");
+				String dPhoneNumber = rows.getString("d_phone_number");
+				String dGender = rows.getString("d_gender");
+				int noOfAppointment = rows.getInt("no_of_appointments");
+				//LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
 				Doctors d1 = new Doctors();
+				d1.setDoctorId(doctorId);
+				d1.setDoctorName(doctorName);
+				d1.setDepartmentId(deptId);
+				d1.setActive(active);
+				d1.setDoctorPresent(present);
+				d1.setdPhoneNumber(dPhoneNumber);
+				d1.setdGender(dGender);
+				d1.setNoOfAppointment(noOfAppointment);
 				list.add(d1);
+			
 			}
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -79,7 +94,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	public List<Doctors> findDoctorByName(String doctorName) throws SQLException, ClassNotFoundException
 	{
 		List<Doctors> list = new ArrayList<>();
-		String sql = "Select doctor_id,department_id,active_doctors from doctors where doctor_name = ?";
+		String sql = "Select doctor_id,department_id,active_doctors,doctor_presence from doctors where doctor_name = ?";
 			
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);ResultSet rows = pst.executeQuery();) {
 			pst.setString(1, doctorName);
@@ -93,8 +108,41 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				int doctorId = rows.getInt("doctor_id");
 				int deptId = rows.getInt("department_id");
 				int active = rows.getInt("active_doctors");
-				LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
+				int present = rows.getInt("doctor_presence");
+				//LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
 				Doctors d1 = new Doctors();
+				d1.setDoctorId(doctorId);
+				d1.setDepartmentId(deptId);
+				d1.setActive(active);
+				d1.setDoctorPresent(present);
+				list.add(d1);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+		}
+		return list;
+	}
+
+	@Override
+	public List<Doctors> doctorsPresent() {
+		List<Doctors> list = new ArrayList<>();
+		String sql = "Select doctor_id,department_id,doctor_name from doctors where doctor_presence = 1";
+		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);ResultSet rows = pst.executeQuery();) {
+
+			LOGGER.debug( sql);
+			
+			// execute query
+			
+			LOGGER.debug("No of rows found: " + rows);
+			while (rows.next()) {
+				int doctorId = rows.getInt("doctor_id");
+				int deptId = rows.getInt("department_id");
+				String docName = rows.getString("doctor_name");
+				//LOGGER.debug(doctorId+"-"+doctorName+"-"+deptId+"-"+active);
+				Doctors d1 = new Doctors();
+				d1.setDoctorId(doctorId);
+				d1.setDepartmentId(deptId);
+				d1.setDoctorName(docName);
 				list.add(d1);
 			}
 		} catch (Exception e) {

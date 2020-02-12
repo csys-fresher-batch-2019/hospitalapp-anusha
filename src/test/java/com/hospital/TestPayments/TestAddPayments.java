@@ -28,8 +28,8 @@ public class TestAddPayments {
 		LOGGER.debug("Enter Amount Paid : ");
 		d1.setAmountPaid(in.nextInt());
 		
-		LOGGER.debug("Enter Bill Date: ");
-		d1.setBillDate(LocalDateTime.parse(in.next()));
+		LOGGER.debug("Enter Bill Date & Time: ");
+		d1.setBillDateTime(LocalDateTime.parse(in.next()));
 		
 		PaymentsDAO dao = DAOFactory.getPaymentsDAO();
 		dao.addPayments(d1);

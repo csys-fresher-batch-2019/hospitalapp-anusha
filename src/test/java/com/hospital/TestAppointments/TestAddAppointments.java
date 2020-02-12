@@ -2,9 +2,6 @@ package com.hospital.testAppointments;
 
 import java.util.Scanner;
 import java.sql.SQLException;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import com.hospital.Appointments;
 import com.hospital.dao.AppointmentsDAO;
 import com.hospital.manage.DAOFactory;
@@ -26,11 +23,8 @@ public class TestAddAppointments {
 		d1.setPurpose(in.next());
 		LOGGER.debug("Enter the DoctorId : ");
 		d1.setDoctorId(in.nextInt());
-		LOGGER.debug("Enter Starting time : ");
-		d1.setStartingTime(LocalDateTime.parse(in.next()));
-		LOGGER.debug("Enter Ending time : ");
-		d1.setEndingTime((d1.getStartingTime()).plus(Duration.of(30, ChronoUnit.MINUTES)));
-
+		LOGGER.debug("Enter the DoctorId : ");
+		
 		// call dao
 		AppointmentsDAO dao =  DAOFactory.getAppointmentsDAO();
 		dao.addAppointments(d1);

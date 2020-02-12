@@ -14,9 +14,9 @@ public class Logger {
 
 	}
 
-	private static void log(Object message) {
+	static void log(Object message) {
 		
-		Logger.log(message);
+		System.out.println(message);
 	}
 
 	public void debug(Object message) {

@@ -5,8 +5,30 @@ public class Doctors {
 	private int doctorId;
 	private String doctorName;
 	private int departmentId;
-	private int active=1;
 	private String doctorPassword;
+	private int active=1;
+	private int doctorPresent=0;
+	private String dGender;
+	private String dPhoneNumber;
+	private int noOfAppointment;
+	public String getdPhoneNumber() {
+		return dPhoneNumber;
+	}
+	public void setdPhoneNumber(String dPhoneNumber) {
+		this.dPhoneNumber = dPhoneNumber;
+	}
+	public int getDoctorPresent() {
+		return doctorPresent;
+	}
+	public void setDoctorPresent(int doctorPresent) {
+		this.doctorPresent = doctorPresent;
+	}
+	public String getdGender() {
+		return dGender;
+	}
+	public void setdGender(String dGender) {
+		this.dGender = dGender;
+	}
 	public int getDoctorId() {
 		return doctorId;
 	}
@@ -36,6 +58,12 @@ public class Doctors {
 	}
 	public void setDoctorPassword(String doctorPassword) {
 		this.doctorPassword = doctorPassword;
+	}
+	public int getNoOfAppointment() {
+		return noOfAppointment;
+	}
+	public void setNoOfAppointment(int noOfAppointment) {
+		this.noOfAppointment = noOfAppointment;
 	}
 	
 }

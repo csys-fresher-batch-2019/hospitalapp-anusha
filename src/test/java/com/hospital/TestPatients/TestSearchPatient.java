@@ -12,7 +12,6 @@ public class TestSearchPatient {
 	private static Logger LOGGER = Logger.getInstance();
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 
 		Scanner in = new Scanner(System.in);
 		
@@ -25,9 +24,6 @@ public class TestSearchPatient {
 
 		in.close();
 		
-		/*PatientsDAOImpl d1= new PatientsDAOImpl();
-		d1.findMyProfile(9);
-		*/
 	}
 
 }
