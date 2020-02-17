@@ -13,12 +13,10 @@ public class TestSearchDoctor {
 	public static void main(String[] args) throws Exception {
 
 		Scanner in = new Scanner(System.in);
-		
-		DoctorsDAO dao = DAOFactory.getDoctorsDAO();
 
 		LOGGER.debug("Enter doctorName : ");
 		String doctorName = in.next();
-
+		DoctorsDAO dao = DAOFactory.getDoctorsDAO();
 		dao.findDoctorByName(doctorName);
 
 		in.close();

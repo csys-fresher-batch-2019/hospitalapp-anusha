@@ -15,7 +15,7 @@ public class TestDeleteApoointments {
 		
         Scanner in = new Scanner(System.in);
         
-        LOGGER.debug("Enter Patient ID : ");
+        LOGGER.debug("Enter Appointment ID : ");
         int patientId = in.nextInt();
 		
         AppointmentsDAO dao = DAOFactory.getAppointmentsDAO();

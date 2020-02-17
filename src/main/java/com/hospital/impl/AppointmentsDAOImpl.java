@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,14 +25,16 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 	public void addAppointments(Appointments app) throws SQLException, ClassNotFoundException
 	{
 		
-		try(Connection con = ConnectionUtil.getconnection(); CallableStatement stmt=con.prepareCall("{call appointment_fixing(?,?,?,?)}")){
+		try(Connection con = ConnectionUtil.getconnection(); 
+				CallableStatement stmt=con.prepareCall("{call appointment_fixing(?,?,?,?)}")){
 			
 			stmt.setInt(1, app.getPatientId());
 			stmt.setString(2, app.getPurpose());
 			stmt.setInt(3,app.getDoctorId()); 
-			stmt.setString(4,app.getAppointmentStatus());
+			stmt.registerOutParameter(4, Types.VARCHAR);
 			stmt.executeUpdate();
-			
+			String status=stmt.getString(4);
+			LOGGER.debug(status);
 		}
 		catch (Exception e) {
 			LOGGER.debug(e);
@@ -57,6 +60,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 				int docId = rows.getInt("doctor_id");
 				int activeApp = rows.getInt(ACTION_3);		
 				String appointmentStatus= rows.getString("appointment_status");
+				LOGGER.debug(appId+""+patientId+""+purpose+""+docId+""+activeApp+""+appointmentStatus);
 				Appointments d1 = new Appointments();
 				d1.setActive(activeApp);
 				d1.setPatientId(patientId);
@@ -97,10 +101,11 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 		List<Appointments> list = new ArrayList<>();
 		String sql = "Select appointment_id, purpose, doctor_id, active_appointments, appointment_status from appointment where patient_id = ?";
 		
-		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
+		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ) {
 			pst.setInt(1, patientId);
 
 			LOGGER.debug( sql+patientId);
+			try(ResultSet rows = pst.executeQuery();){
 			LOGGER.debug("No of rows found: " + rows);
 			
 			while (rows.next()) {
@@ -112,14 +117,14 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 				
 				Appointments d1 = new Appointments();
 				d1.setActive(active);
-				d1.setPatientId(patientId);
 				d1.setDoctorId(doctorId);
 				d1.setAppointmentId(appId);
 				d1.setPurpose(purpose);
 				d1.setAppointmentStatus(appointmentStatus);
 				
 				list.add(d1);
-				
+				LOGGER.debug(appId+" "+purpose+" "+doctorId+" "+active +" "+ appointmentStatus );
+			}
 			}
 			
 		} 
@@ -134,13 +139,15 @@ public List<Appointments> doctorAppointments(int doctorId) throws SQLException, 
 		List<Appointments> list = new ArrayList<>();
 		String sql = "Select appointment_id, purpose, patient_id, active_appointments from appointment where doctor_id = ?";
 		
-		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
+		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ) {
 
 			pst.setInt(1, doctorId);			
 			LOGGER.debug(sql+doctorId);
-			LOGGER.debug("No of rows found: " + rows);
 			
-			while (rows.next()) {
+			try(ResultSet rows = pst.executeQuery();){
+				LOGGER.debug("No of rows found: " + rows);
+				
+				while (rows.next()) {
 				int appId = rows.getInt(ACTION_1);
 				String purpose = rows.getString(ACTION_2);
 				int patientId = rows.getInt("patient_id");
@@ -154,6 +161,9 @@ public List<Appointments> doctorAppointments(int doctorId) throws SQLException, 
 				
 				list.add(d2);
 				
+				LOGGER.debug(appId+" "+purpose+" "+patientId+" "+active );
+				
+			}
 			}
 			
 		} 

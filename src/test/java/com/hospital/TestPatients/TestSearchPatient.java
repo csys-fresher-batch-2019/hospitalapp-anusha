@@ -15,11 +15,9 @@ public class TestSearchPatient {
 
 		Scanner in = new Scanner(System.in);
 		
-		PatientsDAO dao = DAOFactory.getPatientsDAO();
-
 		LOGGER.debug("Enter patientId : ");
 		int patientId = in.nextInt();
-
+		PatientsDAO dao = DAOFactory.getPatientsDAO();
 		dao.findMyProfile(patientId);
 
 		in.close();

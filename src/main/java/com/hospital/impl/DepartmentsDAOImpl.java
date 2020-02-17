@@ -19,7 +19,7 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 	public void addDepartment(Departments dept) throws ClassNotFoundException, SQLException {
 		
 		String sql = "insert into departments (department_id,department_name)values (department_id_sq.nextval,?)";
-		LOGGER.debug("insert into departments (department_id,department_name)values (department_id_sq.nextval,?)");
+		LOGGER.debug(sql);
 
 		try (Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 
@@ -33,10 +33,10 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		}
 	}
 
-	public List<Departments> displayDepartments() throws ClassNotFoundException, SQLException {
+	public List<Departments> adminDisplayDepartments() throws ClassNotFoundException, SQLException {
 
 		List<Departments> list = new ArrayList<>();
-		String sql = "select department_id,department_name from departments";
+		String sql = "select department_id,department_name, active_departments from departments ";
 		LOGGER.debug(sql);
 
 		try (Connection con = ConnectionUtil.getconnection();
@@ -48,10 +48,14 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 			while (rows.next()) {
 				String deptName = rows.getString("department_name");
 				int deptId = rows.getInt("department_id");
+				int active = rows.getInt("active_departments");
 				LOGGER.debug(deptId + "-" + deptName);
+				
 				Departments d1 = new Departments();
 				d1.setDepartmentID(deptId);
 				d1.setDepartmentName(deptName);
+				d1.setActive(active);
+				
 				list.add(d1);
 			}
 		} catch (Exception e) {
@@ -64,7 +68,7 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 	public void updateDepartment(int active, int departmentID) throws ClassNotFoundException, SQLException {
 
 		String sql = "Update departments set active_departments = ? where department_id = ?";
-		LOGGER.debug("Update departments set active_departments = ? where department_id = ?");
+		LOGGER.debug(sql);
 
 		try (Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 
@@ -78,6 +82,36 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		} catch (Exception e) {
 			LOGGER.debug(e);
 		}
+
+	}
+	public List<Departments> displayDepartments() throws ClassNotFoundException, SQLException {
+
+		List<Departments> list = new ArrayList<>();
+		String sql = "select department_id,department_name from departments ";
+		LOGGER.debug(sql);
+
+		try (Connection con = ConnectionUtil.getconnection();
+				Statement stmt = con.createStatement();
+				ResultSet rows = stmt.executeQuery(sql);) {
+
+			LOGGER.debug(rows);
+
+			while (rows.next()) {
+				String deptName = rows.getString("department_name");
+				int deptId = rows.getInt("department_id");
+				
+				LOGGER.debug(deptId + "-" + deptName);
+				
+				Departments d1 = new Departments();
+				d1.setDepartmentID(deptId);
+				d1.setDepartmentName(deptName);
+				
+				list.add(d1);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+		}
+		return list;
 
 	}
 

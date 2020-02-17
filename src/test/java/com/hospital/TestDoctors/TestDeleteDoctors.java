@@ -21,7 +21,7 @@ public class TestDeleteDoctors {
 		
 		LOGGER.debug("Enter doctorId : ");
 		int doctorId = in.nextInt();
-
+		
 		dao.deleteDoctors(doctorId);
 
 		in.close();

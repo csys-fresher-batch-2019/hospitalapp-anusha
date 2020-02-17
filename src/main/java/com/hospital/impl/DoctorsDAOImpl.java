@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.hospital.Doctors;
 import com.hospital.dao.DoctorsDAO;
 import com.hospital.manage.ConnectionUtil;
@@ -42,12 +41,13 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 
 	public List<Doctors> displayDoctors() throws ClassNotFoundException, SQLException {
 
-		List<Doctors> list;
-		list = new ArrayList<>();
+		List<Doctors> list = new ArrayList<>();
 		
 		String sql = "select doctor_id,doctor_name,department_id,active_doctors,doctor_presence,d_phone_number,d_gender,no_of_appointments from doctors";	
 		
-		try(Connection con = ConnectionUtil.getconnection(); Statement stmt = con.createStatement();ResultSet rows = stmt.executeQuery(sql);) {
+		try(Connection con = ConnectionUtil.getconnection(); 
+				Statement stmt = con.createStatement();
+				ResultSet rows = stmt.executeQuery(sql);) {
 
 			while (rows.next()) {
 				int doctorId = rows.getInt(ACTION_1);
@@ -58,7 +58,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				String dPhoneNumber = rows.getString("d_phone_number");
 				String dGender = rows.getString("d_gender");
 				int noOfAppointment = rows.getInt("no_of_appointments");
-				
+				LOGGER.debug(doctorId+doctorName+deptId+active+present+dPhoneNumber+dGender+noOfAppointment);
 				Doctors d1 = new Doctors();
 				d1.setDoctorId(doctorId);
 				d1.setDoctorName(doctorName);
@@ -94,33 +94,32 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 		}
 	}
 	
-	public List<Doctors> findDoctorByName(String doctorName) throws SQLException, ClassNotFoundException
+	public List<Doctors> findDoctorByName(String doctorName) 
 	{
 		List<Doctors> list = new ArrayList<>();
-		String sql = "Select doctor_id,department_id,active_doctors,doctor_presence from doctors where doctor_name = ?";
+		String sql = "Select doctor_id,department_id from doctors where active_doctors = 1 and doctor_name = ?";
 			
-		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);ResultSet rows = pst.executeQuery();) {
+		try(Connection con = ConnectionUtil.getconnection(); 
+			PreparedStatement pst = con.prepareStatement(sql)) {
 			pst.setString(1, doctorName);
 
-			LOGGER.debug( "Select doctor_id,department_id,active_doctors from doctors where doctor_name = "+doctorName);
+			//LOGGER.debug( "Select doctor_id,department_id,active_doctors from doctors where doctor_name = "+doctorName);
 			
 			// execute query
-			
-			LOGGER.debug("No of rows found: " + rows);
+			try(ResultSet rows = pst.executeQuery()){
+				//LOGGER.debug("No of rows found: " + rows);
 			while (rows.next()) {
+				
 				int doctorId = rows.getInt(ACTION_1);
 				int deptId = rows.getInt(ACTION_2);
-				int active = rows.getInt("active_doctors");
-				int present = rows.getInt("doctor_presence");
-				
+				LOGGER.debug(" "+doctorId+" "+deptId);
 				Doctors d1 = new Doctors();
 				d1.setDoctorId(doctorId);
 				d1.setDepartmentId(deptId);
-				d1.setActive(active);
-				d1.setDoctorPresent(present);
 				
 				list.add(d1);
-			}
+			}}
+			
 		} catch (Exception e) {
 			LOGGER.debug(e);
 		}
@@ -130,18 +129,23 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	@Override
 	public List<Doctors> doctorsPresent() {
 		List<Doctors> list = new ArrayList<>();
+		
 		String sql = "Select doctor_id,department_id,doctor_name from doctors where doctor_presence = 1";
-		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);ResultSet rows = pst.executeQuery();) {
-
-			LOGGER.debug( sql);
+		LOGGER.debug( sql);
+		
+		try(Connection con = ConnectionUtil.getconnection();
+			Statement stmt = con.createStatement();
+			ResultSet rows = stmt.executeQuery(sql);) {
 			
 			// execute query
-			
 			LOGGER.debug("No of rows found: " + rows);
+			
 			while (rows.next()) {
 				int doctorId = rows.getInt(ACTION_1);
 				int deptId = rows.getInt(ACTION_2);
 				String docName = rows.getString("doctor_name");
+				
+				LOGGER.debug(doctorId+deptId+docName);
 				
 				Doctors d1 = new Doctors();
 				d1.setDoctorId(doctorId);

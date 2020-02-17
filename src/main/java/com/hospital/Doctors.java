@@ -1,7 +1,15 @@
 package com.hospital;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Types;
+
+import com.hospital.manage.ConnectionUtil;
+import com.hospital.manage.Logger;
+
 public class Doctors {
 
+	private static final Logger LOGGER = Logger.getInstance();
 	private int doctorId;
 	private String doctorName;
 	private int departmentId;
@@ -65,5 +73,28 @@ public class Doctors {
 	public void setNoOfAppointment(int noOfAppointment) {
 		this.noOfAppointment = noOfAppointment;
 	}
-	
+public boolean login(Doctors user) {
+		
+		try(Connection con = ConnectionUtil.getconnection();
+				CallableStatement stmt=con.prepareCall("{call doctor_login(?,?,?)}")) {
+		stmt.setString(1,user.getdPhoneNumber());
+		stmt.setString(2, user.getDoctorPassword());
+		stmt.registerOutParameter(3, Types.VARCHAR);
+		stmt.executeUpdate();
+		String status=stmt.getString(3);
+		LOGGER.info("Status = "+status);
+		if(status.equals("Success")) {
+		LOGGER.debug("Logged In");
+		return true;
+		}
+		else {
+		LOGGER.debug("Logged out");
+		return false;
+		}
+		} catch (Exception e) {
+		LOGGER.debug(e);
+		}
+
+		return false;
+		}
 }

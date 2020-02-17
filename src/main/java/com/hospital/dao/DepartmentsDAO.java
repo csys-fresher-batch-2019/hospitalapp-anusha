@@ -16,4 +16,7 @@ public interface DepartmentsDAO {
 	//update
 	void updateDepartment(int active, int departmentID ) throws ClassNotFoundException, SQLException;
 
+	//admin view
+	public List<Departments> adminDisplayDepartments() throws ClassNotFoundException, SQLException ;
+
 }

@@ -30,8 +30,8 @@ public class PatientsDAOImpl implements PatientsDAO {
 			pst.setString(1, p.getPatientName());
 			pst.setInt(2, p.getAge());
 			pst.setString(3, p.getAddress());
-			pst.setString(4, p.getPhoneNumber());
-			pst.setString(5, p.getGender());
+			pst.setString(4, p.getpPhoneNumber());
+			pst.setString(5, p.getpGender());
 			pst.setString(6,p.getPatientPassword());
 
 			// execute query
@@ -66,10 +66,11 @@ public class PatientsDAOImpl implements PatientsDAO {
 				d1.setActivePatient(active);
 				d1.setAddress(address);
 				d1.setAge(age);
-				d1.setGender(gender);
+				d1.setpGender(gender);
 				d1.setPatientName(patientName);
-				d1.setPhoneNumber(phoneNo);
+				d1.setpPhoneNumber(phoneNo);
 				list.add(d1);
+				LOGGER.debug(patientId+" "+patientName+" "+active+" "+age+" "+gender+" "+address+" "+phoneNo+" "+active);
 			}
 		} 
 		catch (Exception e) {
@@ -81,14 +82,15 @@ public class PatientsDAOImpl implements PatientsDAO {
 
 	public void deletePatients(int patientId) throws ClassNotFoundException, SQLException {
 
-		String sql = "update active_patients=0 from patient where patient_id = ?";
-		LOGGER.debug("sql"+patientId);
+		String sql = "update patient set active_patients=0 where patient_id = ?";
+		LOGGER.debug(sql+patientId);
 
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 			pst.setInt(1, patientId);
 
 			// execute query
+			
 			int rows = pst.executeUpdate();
 			LOGGER.debug("No of rows deleted " + rows);
 		} catch (Exception e) {
@@ -102,29 +104,32 @@ public class PatientsDAOImpl implements PatientsDAO {
 		List<Patients> list = new ArrayList<>();
 		String sql = "Select patient_name, age, address, p_phone_number, p_gender from patient where patient_id = ?";
 		
-		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
+		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 			pst.setInt(1, patientId);
 
-			LOGGER.debug(sql+patientId);
-
-			LOGGER.debug("No of rows found: " + rows);
+			try(ResultSet rows = pst.executeQuery()){
+			//LOGGER.debug("No of rows found: " + rows);
 
 			while (rows.next()) {		
+				
 				String name = rows.getString("patient_name");
 				int age = rows.getInt("age");
 				String address = rows.getString("address");
-				String phoneNumber = rows.getString("phone_number");
+				String phoneNumber = rows.getString("p_phone_number");
 				String gender = rows.getString("p_gender");
 				
+				LOGGER.debug(" "+name+" "+age+" "+address+" "+phoneNumber+" "+gender);
+				
 				Patients d2 = new Patients();
+				
 				d2.setPatientName(name);
 				d2.setAddress(address);
 				d2.setAge(age);
-				d2.setPhoneNumber(phoneNumber);
-				d2.setGender(gender);
+				d2.setpPhoneNumber(phoneNumber);
+				d2.setpGender(gender);
 				
 				list.add(d2);
-
+			}
 			}
 		} catch (Exception e) {
 			LOGGER.debug(e);

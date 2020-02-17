@@ -1,3 +1,4 @@
+
 package com.hospital.testAppointments;
 
 import java.util.Scanner;
@@ -22,7 +23,6 @@ public class TestAddAppointments {
 		d1.setPurpose(in.next());
 		LOGGER.debug("Enter the DoctorId : ");
 		d1.setDoctorId(in.nextInt());
-		LOGGER.debug("Enter the DoctorId : ");
 		
 		// call dao
 		AppointmentsDAO dao =  DAOFactory.getAppointmentsDAO();

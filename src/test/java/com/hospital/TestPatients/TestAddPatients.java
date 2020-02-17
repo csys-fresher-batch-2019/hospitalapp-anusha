@@ -26,13 +26,13 @@ public class TestAddPatients {
 		d1.setAge(in.nextInt());
 
 		LOGGER.debug("Enter gender : ");
-		d1.setGender(in.next());
+		d1.setpGender(in.next());
 
 		LOGGER.debug("Enter address : ");
 		d1.setAddress(in.next());
 
 		LOGGER.debug("Enter phoneNumber : ");
-		d1.setPhoneNumber(in.next());
+		d1.setpPhoneNumber(in.next());
 
 		LOGGER.debug("Enter patientPassword : ");
 		d1.setPatientPassword(in.next());
