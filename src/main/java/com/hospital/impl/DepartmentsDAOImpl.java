@@ -60,6 +60,36 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 		return list;
 
 	}
+	
+	public List<Departments> adminDisplayDepartments() throws ClassNotFoundException, SQLException {
+
+		List<Departments> list = new ArrayList<>();
+		String sql = "select department_id, department_name, active_departments  from departments";
+		LOGGER.debug(sql);
+
+		try (Connection con = ConnectionUtil.getconnection();
+				Statement stmt = con.createStatement();
+				ResultSet rows = stmt.executeQuery(sql);) {
+
+			LOGGER.debug(rows);
+
+			while (rows.next()) {
+				String deptName = rows.getString("department_name");
+				int deptId = rows.getInt("department_id");
+				int active = rows.getInt("active_departments");
+				LOGGER.debug(deptId + "-" + deptName);
+				Departments d1 = new Departments();
+				d1.setDepartmentID(deptId);
+				d1.setDepartmentName(deptName);
+				d1.setActive(active);
+				list.add(d1);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+		}
+		return list;
+
+	}
 
 	public void updateDepartment(int active, int departmentID) throws ClassNotFoundException, SQLException {
 

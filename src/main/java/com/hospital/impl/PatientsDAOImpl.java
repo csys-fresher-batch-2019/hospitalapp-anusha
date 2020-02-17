@@ -30,7 +30,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 			pst.setString(1, p.getPatientName());
 			pst.setInt(2, p.getAge());
 			pst.setString(3, p.getAddress());
-			pst.setString(4, p.getPhoneNumber());
+			pst.setString(4, p.getpPhoneNumber());
 			pst.setString(5, p.getGender());
 			pst.setString(6,p.getPatientPassword());
 
@@ -61,6 +61,8 @@ public class PatientsDAOImpl implements PatientsDAO {
 				String address = rows.getString("address");
 				String phoneNo = rows.getString("p_phone_number");
 				int active = rows.getInt("active_patients");
+				
+				LOGGER.debug(patientId+" "+patientName+" "+age+" "+gender+" "+address+" "+phoneNo+" "+active );
 				Patients d1 = new Patients();
 				d1.setPatientId(patientId);
 				d1.setActivePatient(active);
@@ -68,7 +70,8 @@ public class PatientsDAOImpl implements PatientsDAO {
 				d1.setAge(age);
 				d1.setGender(gender);
 				d1.setPatientName(patientName);
-				d1.setPhoneNumber(phoneNo);
+				d1.setpPhoneNumber(phoneNo);
+				
 				list.add(d1);
 			}
 		} 
@@ -100,7 +103,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 	public List<Patients> findMyProfile(int patientId) throws SQLException, ClassNotFoundException {
 
 		List<Patients> list = new ArrayList<>();
-		String sql = "Select patient_name, age, address, p_phone_number, p_gender from patient where patient_id = ?";
+		String sql = "Select patient_id,patient_name, age, address, p_phone_number, p_gender,active_patients from patient where patient_id = ?";
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ResultSet rows = pst.executeQuery();) {
 			pst.setInt(1, patientId);
@@ -120,7 +123,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 				d2.setPatientName(name);
 				d2.setAddress(address);
 				d2.setAge(age);
-				d2.setPhoneNumber(phoneNumber);
+				d2.setpPhoneNumber(phoneNumber);
 				d2.setGender(gender);
 				
 				list.add(d2);

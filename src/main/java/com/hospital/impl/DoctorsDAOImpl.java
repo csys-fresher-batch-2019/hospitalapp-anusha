@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.hospital.Doctors;
 import com.hospital.dao.DoctorsDAO;
 import com.hospital.manage.ConnectionUtil;

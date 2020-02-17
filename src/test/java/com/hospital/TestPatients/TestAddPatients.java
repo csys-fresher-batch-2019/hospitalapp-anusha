@@ -32,7 +32,7 @@ public class TestAddPatients {
 		d1.setAddress(in.next());
 
 		LOGGER.debug("Enter phoneNumber : ");
-		d1.setPhoneNumber(in.next());
+		d1.setpPhoneNumber(in.next());
 
 		LOGGER.debug("Enter patientPassword : ");
 		d1.setPatientPassword(in.next());
