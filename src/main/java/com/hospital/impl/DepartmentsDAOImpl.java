@@ -87,7 +87,7 @@ public class DepartmentsDAOImpl implements DepartmentsDAO {
 	public List<Departments> displayDepartments() throws ClassNotFoundException, SQLException {
 
 		List<Departments> list = new ArrayList<>();
-		String sql = "select department_id,department_name from departments ";
+		String sql = "select department_id,department_name from departments where active_departments = 1";
 		LOGGER.debug(sql);
 
 		try (Connection con = ConnectionUtil.getconnection();

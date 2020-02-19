@@ -19,6 +19,8 @@ public class Doctors {
 	private String dGender;
 	private String dPhoneNumber;
 	private int noOfAppointment;
+	
+	private Departments department;
 	public String getdPhoneNumber() {
 		return dPhoneNumber;
 	}
@@ -27,6 +29,12 @@ public class Doctors {
 	}
 	public int getDoctorPresent() {
 		return doctorPresent;
+	}
+	public Departments getDepartment() {
+		return department;
+	}
+	public void setDepartment(Departments department) {
+		this.department = department;
 	}
 	public void setDoctorPresent(int doctorPresent) {
 		this.doctorPresent = doctorPresent;

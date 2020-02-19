@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import com.hospital.Departments;
 import com.hospital.Doctors;
@@ -77,7 +76,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 			LOGGER.debug(e);
 		}
 
-		return Collections.emptyList();
+		return list;
 	}
 
 	public void deletePatients(int patientId) throws ClassNotFoundException, SQLException {
@@ -102,9 +101,10 @@ public class PatientsDAOImpl implements PatientsDAO {
 	public List<Patients> findMyProfile(int patientId) throws SQLException, ClassNotFoundException {
 
 		List<Patients> list = new ArrayList<>();
-		String sql = "Select patient_name, age, address, p_phone_number, p_gender from patient where patient_id = ?";
+		String sql = "Select patient_id,patient_name, age, address, p_phone_number, p_gender from patient where patient_id = ?";
 		
-		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+		try(Connection con = ConnectionUtil.getconnection(); 
+				PreparedStatement pst = con.prepareStatement(sql)) {
 			pst.setInt(1, patientId);
 
 			try(ResultSet rows = pst.executeQuery()){
@@ -120,15 +120,15 @@ public class PatientsDAOImpl implements PatientsDAO {
 				
 				LOGGER.debug(" "+name+" "+age+" "+address+" "+phoneNumber+" "+gender);
 				
-				Patients d2 = new Patients();
+				Patients d1 = new Patients();
 				
-				d2.setPatientName(name);
-				d2.setAddress(address);
-				d2.setAge(age);
-				d2.setpPhoneNumber(phoneNumber);
-				d2.setpGender(gender);
-				
-				list.add(d2);
+				d1.setPatientName(name);
+				d1.setAddress(address);
+				d1.setAge(age);
+				d1.setpPhoneNumber(phoneNumber);
+				d1.setpGender(gender);
+				d1.setPatientId(patientId);
+				list.add(d1);
 			}
 			}
 		} catch (Exception e) {
@@ -157,7 +157,7 @@ public class PatientsDAOImpl implements PatientsDAO {
 				Doctors d2 = new Doctors();
 				d2.setDoctorName(doctorName);
 				d2.setDoctorId(doctorId);
-				
+				d2.setDepartment(d1);
 				list.add(d2);
 
 			}
@@ -166,6 +166,32 @@ public class PatientsDAOImpl implements PatientsDAO {
 		}
 		return list;
 	}
+
+	public int getUserId(String pPhoneNumber, String patientPassword) {
+		String sql="select patient_id from patient where p_phone_number=?and patient_password=?";
+		System.out.println(sql);
+		int v= 0;
+		try(Connection connection=ConnectionUtil.getconnection();
+		     PreparedStatement pst = connection.prepareStatement(sql);){
+		       pst.setString(1,pPhoneNumber);
+		       pst.setString(2,patientPassword);
+		       
+		       try(ResultSet row =pst. executeQuery())
+		{
+		                if(row.next()) {
+		               	v= row.getInt("patient_Id");
+		               	
+		                }
+		}  }catch(SQLException | ClassNotFoundException e)
+		{
+
+		        LOGGER.error(e);
+		        }
+		                return v;
+
+
+
+		}
 
 
 }

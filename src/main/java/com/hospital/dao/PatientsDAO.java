@@ -22,4 +22,6 @@ public interface PatientsDAO {
 	//profile
 	public List<Patients> findMyProfile(int patientId) throws SQLException, ClassNotFoundException;
 
+	//get id
+	public int getUserId(String pPhoneNumber, String patientPassword) ;
 }

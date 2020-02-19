@@ -97,7 +97,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 	public List<Doctors> findDoctorByName(String doctorName) 
 	{
 		List<Doctors> list = new ArrayList<>();
-		String sql = "Select doctor_id,department_id from doctors where active_doctors = 1 and doctor_name = ?";
+		String sql = "Select doctor_id,doctor_name,department_id from doctors where active_doctors = 1 and doctor_name = ?";
 			
 		try(Connection con = ConnectionUtil.getconnection(); 
 			PreparedStatement pst = con.prepareStatement(sql)) {
@@ -116,7 +116,7 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 				Doctors d1 = new Doctors();
 				d1.setDoctorId(doctorId);
 				d1.setDepartmentId(deptId);
-				
+				d1.setDoctorName(doctorName);
 				list.add(d1);
 			}}
 			
@@ -159,5 +159,72 @@ public class DoctorsDAOImpl implements DoctorsDAO {
 		}
 		return list;
 	}
+	public List<Doctors> displayDoctorProfile(int doctorId) throws ClassNotFoundException, SQLException {
 
+		List<Doctors> list = new ArrayList<>();
+		
+		String sql = "select doctor_id,doctor_name,department_id,active_doctors,doctor_presence,d_phone_number,d_gender,no_of_appointments from doctors where doctor_id=?";	
+		
+		try(Connection con = ConnectionUtil.getconnection(); 
+				PreparedStatement pst = con.prepareStatement(sql)) {
+
+			pst.setInt(1, doctorId);
+
+			try(ResultSet rows = pst.executeQuery()){
+			
+			while (rows.next()) {
+				int docId = rows.getInt(ACTION_1);
+				String doctorName = rows.getString("doctor_name");
+				int deptId = rows.getInt(ACTION_2);
+				int active = rows.getInt("active_doctors");
+				int present = rows.getInt("doctor_presence");
+				String dPhoneNumber = rows.getString("d_phone_number");
+				String dGender = rows.getString("d_gender");
+				int noOfAppointment = rows.getInt("no_of_appointments");
+				LOGGER.debug(doctorId+doctorName+deptId+active+present+dPhoneNumber+dGender+noOfAppointment);
+				Doctors d1 = new Doctors();
+				d1.setDoctorId(docId);
+				d1.setDoctorName(doctorName);
+				d1.setDepartmentId(deptId);
+				d1.setActive(active);
+				d1.setDoctorPresent(present);
+				d1.setdPhoneNumber(dPhoneNumber);
+				d1.setdGender(dGender);
+				d1.setNoOfAppointment(noOfAppointment);
+				
+				list.add(d1);
+			
+			}
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+		}
+		return list;
+	}
+	public int getUserId(String dPhoneNumber, String doctorPassword) {
+		String sql="select doctor_id from doctors where d_phone_number=?and doctor_password=?";
+		System.out.println(sql);
+		int v= 0;
+		try(Connection connection=ConnectionUtil.getconnection();
+		     PreparedStatement pst = connection.prepareStatement(sql);){
+		       pst.setString(1,dPhoneNumber);
+		       pst.setString(2,doctorPassword);
+		       
+		       try(ResultSet row =pst. executeQuery())
+		{
+		                if(row.next()) {
+		               	v= row.getInt("doctor_Id");
+		               	
+		                }
+		}  }catch(SQLException | ClassNotFoundException e)
+		{
+
+		        LOGGER.error(e);
+		        }
+		                return v;
+
+
+
+		}
+	
 }

@@ -21,4 +21,7 @@ public interface DoctorsDAO {
 	
 	//doc present
 	public List<Doctors> doctorsPresent();
+	
+	public List<Doctors> displayDoctorProfile(int doctorId) throws ClassNotFoundException, SQLException;
+
 }

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import com.hospital.Appointments;
 import com.hospital.dao.AppointmentsDAO;
@@ -75,7 +74,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 		catch (Exception e) {
 			LOGGER.debug(e);
 		}
-		return Collections.emptyList();
+		return list;
 	}
 
 	public void deleteAppointments(int appointmentId) throws ClassNotFoundException, SQLException {
@@ -99,7 +98,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 	public List<Appointments> findMyAppointments(int patientId) throws SQLException, ClassNotFoundException {
 		
 		List<Appointments> list = new ArrayList<>();
-		String sql = "Select appointment_id, purpose, doctor_id, active_appointments, appointment_status from appointment where patient_id = ?";
+		String sql = "Select appointment_id,patient_id, purpose, doctor_id, active_appointments, appointment_status from appointment where patient_id = ?";
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ) {
 			pst.setInt(1, patientId);
@@ -114,14 +113,17 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 				int doctorId = rows.getInt("doctor_id");
 				int active = rows.getInt(ACTION_3);
 				String appointmentStatus= rows.getString("appointment_status");
+				int patId = rows.getInt("patient_id");
 				
 				Appointments d1 = new Appointments();
-				d1.setActive(active);
+				
+				d1.setAppointmentId(appId);			
 				d1.setDoctorId(doctorId);
-				d1.setAppointmentId(appId);
+				d1.setPatientId(patId);
 				d1.setPurpose(purpose);
 				d1.setAppointmentStatus(appointmentStatus);
-				
+				d1.setActive(active);
+						
 				list.add(d1);
 				LOGGER.debug(appId+" "+purpose+" "+doctorId+" "+active +" "+ appointmentStatus );
 			}
@@ -137,7 +139,7 @@ public class AppointmentsDAOImpl implements AppointmentsDAO {
 public List<Appointments> doctorAppointments(int doctorId) throws SQLException, ClassNotFoundException {
 		
 		List<Appointments> list = new ArrayList<>();
-		String sql = "Select appointment_id, purpose, patient_id, active_appointments from appointment where doctor_id = ?";
+		String sql = "Select appointment_id, purpose, doctor_id, patient_id, active_appointments ,appointment_status from appointment where doctor_id = ?";
 		
 		try(Connection con = ConnectionUtil.getconnection(); PreparedStatement pst = con.prepareStatement(sql); ) {
 
@@ -152,12 +154,15 @@ public List<Appointments> doctorAppointments(int doctorId) throws SQLException, 
 				String purpose = rows.getString(ACTION_2);
 				int patientId = rows.getInt("patient_id");
 				int active = rows.getInt(ACTION_3);
-				
+				String appointmentStatus=rows.getString("appointment_status");
 				Appointments d2 = new Appointments();
+				
 				d2.setAppointmentId(appId);
 				d2.setPurpose(purpose);
+				d2.setDoctorId(doctorId);
 				d2.setPatientId(patientId);
 				d2.setActive(active);
+				d2.setAppointmentStatus(appointmentStatus);
 				
 				list.add(d2);
 				
